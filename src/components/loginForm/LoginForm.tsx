@@ -4,7 +4,7 @@ import styles from "./LoginForm.module.scss";
 
 const LoginForm = () => {
     return <form className={styles.form}>
-        <VStack gap={6} padding={8}>
+        <VStack width='full' gap={6} padding={8}>
             <h1 className={styles.heading}>Войти</h1>
             <Field.Root>
                 <Field.Label>Email</Field.Label>
@@ -17,7 +17,7 @@ const LoginForm = () => {
                 <Input placeholder="Введите пароль" />
                 <Field.ErrorText>This field is required</Field.ErrorText>
             </Field.Root>
-            <p>Нет аккаунта? <Link className={styles.link} to={'/signup'}>Зарегестрируйтесь</Link></p>
+            <p>Нет аккаунта? <Link className={styles.link} to={'/signup'}>Зарегистрируйтесь</Link></p>
             <Button width='full'>Войти</Button>
         </VStack>
     </form>

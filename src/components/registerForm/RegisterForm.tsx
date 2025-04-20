@@ -4,7 +4,7 @@ import {Link} from "react-router";
 
 const RegisterForm = () => {
     return <form className={styles.form}>
-        <VStack gap={6} padding={8}>
+        <VStack width="full" gap={6} padding={8}>
             <h1 className={styles.heading}>Войти</h1>
 
             <Field.Root>
@@ -25,7 +25,7 @@ const RegisterForm = () => {
                 <Field.ErrorText>This field is required</Field.ErrorText>
             </Field.Root>
             <p>Есть аккаунт? <Link className={styles.link} to={'/login'}>Войдите</Link></p>
-            <Button width='full'>Зарегестрироваться</Button>
+            <Button width='full'>Зарегистрироваться</Button>
         </VStack>
     </form>
 }
