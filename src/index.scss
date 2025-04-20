@@ -1,0 +1,14 @@
+@use './scss/normalize.scss';
+
+body {
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  max-width: 500px;
+  margin: 0 auto;
+}
