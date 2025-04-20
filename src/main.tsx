@@ -4,10 +4,11 @@ import './index.scss'
 import App from './App.tsx'
 import {Provider} from "@/components/ui/provider";
 
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <Provider>
-            <App/>
-        </Provider>
+            <Provider>
+                <App/>
+            </Provider>
     </StrictMode>,
 )
