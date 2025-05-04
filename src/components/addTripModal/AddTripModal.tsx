@@ -2,6 +2,7 @@ import {Button, Dialog, Field, Input, Portal, VStack} from "@chakra-ui/react";
 import styles from "./addTripModal.module.scss";
 import {useState} from "react";
 import {validateEndDate, validateNumber, validateRequiredField, validateStartDate} from "@/utils/validators.ts";
+import {useAddTripMutation} from "@/api/tripsApi.ts";
 
 const AddTripModal = () => {
     const [name, setName] = useState("");
@@ -13,6 +14,8 @@ const AddTripModal = () => {
     const [startDateError, setStartDateError] = useState("");
     const [endDateError, setEndDateError] = useState("");
     const [budgetError, setBudgetError] = useState("");
+
+    const [addTrip] = useAddTripMutation();
 
 
     const handleSubmit = () => {
@@ -28,6 +31,8 @@ const AddTripModal = () => {
         if (startDateError || endDateError || budgetError || nameError) {
             return;
         }
+
+        addTrip({name, startDate: new Date(startDate), endDate: new Date(endDate), budget: parseInt(budget)});
     }
 
 
