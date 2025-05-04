@@ -46,6 +46,8 @@ const AddTaskModal = () => {
     };
 
     return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
             <Dialog.Trigger asChild>
                 <Button className={styles.add}>

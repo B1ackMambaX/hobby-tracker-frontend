@@ -1,7 +1,10 @@
 import styles from './tripInfo.module.scss'
-import {Link} from "react-router";
+import {Link, useParams} from "react-router";
 import {useState} from "react";
 import CheckList from "@/components/checkList/CheckList.tsx";
+import {useGetTripsQuery} from "@/api/tripsApi.ts";
+import {Button} from "@chakra-ui/react";
+import {downloadIcsFile} from "@/utils/ics.ts";
 
 enum ActiveTab {
     CHECK_LIST,
@@ -11,6 +14,20 @@ enum ActiveTab {
 
 const TripInfo = () => {
     const [activeTab, setActiveTab] = useState<ActiveTab>(ActiveTab.CHECK_LIST)
+    const {id} = useParams();
+    const {data: trips} = useGetTripsQuery();
+
+    const handleAddToCalendar = () => {
+        if (!trips) return;
+        const trip = trips.filter(trip => trip._id === id)[0];
+        downloadIcsFile({
+            id: trip._id!,
+            name: trip.name,
+            startDate: new Date(trip.startDate),
+            endDate: new Date(trip.endDate)
+        })
+    }
+
     return <section className={styles.wrapper}>
         <Link to="/">
             <div className={styles.back}>
@@ -19,21 +36,26 @@ const TripInfo = () => {
                 </svg>
             </div>
         </Link>
-        <h2 className={styles.heading}>Информация о путешествии</h2>
 
+        <h2 className={styles.heading}>{trips && trips.filter(trip => trip._id === id)[0].name}</h2>
+        <Button
+            onClick={handleAddToCalendar}
+            className={styles.addToCalendar}>Добавить в календарь</Button>
         <section className={styles.inner}>
             <div className={styles.tabs}>
                 <div
                     className={`${styles.tab} ${activeTab === ActiveTab.CHECK_LIST ? styles.tab_active : ''}`}
                     onClick={() => setActiveTab(ActiveTab.CHECK_LIST)}
-                >Чек-лист</div>
+                >Чек-лист
+                </div>
                 <div
                     className={`${styles.tab} ${activeTab === ActiveTab.BUDGET ? styles.tab_active : ''}`}
                     onClick={() => setActiveTab(ActiveTab.BUDGET)}
-                >Бюджет</div>
+                >Бюджет
+                </div>
             </div>
 
-            <CheckList />
+            <CheckList/>
         </section>
     </section>
 }

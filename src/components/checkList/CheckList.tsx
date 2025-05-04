@@ -11,7 +11,7 @@ const CheckList = () => {
     const [updateTask] = useUpdateTaskMutation();
 
     const processTasks = () => {
-        return tasks && tasks.length === 0 ? <p>Пока что нет задач</p> : tasks.map((task) => {
+        return tasks && tasks.length === 0 ? <p>Пока что нет задач</p> : tasks!.map((task) => {
             const checked = task.status === "done";
             return (<Checkbox.Root
                 checked={checked}
@@ -37,7 +37,6 @@ const CheckList = () => {
 
     return <VStack align={'start'} gap={"1rem"} className={styles.list}>
         {isFetching ? <Spinner/> : <>{processTasks()}<AddTaskModal/></>}
-
     </VStack>
 }
 
