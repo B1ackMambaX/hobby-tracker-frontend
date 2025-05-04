@@ -1,33 +1,34 @@
 import {Button, Field, Input, VStack} from "@chakra-ui/react";
-import styles from "./registerForm.module.scss";
 import {Link} from "react-router";
+import styles from "./registerForm.module.scss";
 
-const RegisterForm = () => {
+const LoginForm = () => {
     return <form className={styles.form}>
-        <VStack width="full" gap={6} padding={8}>
-            <h1 className={styles.heading}>Зарегистрироваться</h1>
-
+        <img className={styles.logo} src="/public/logo.svg" alt="Логотип"/>
+        <VStack className={styles.inner} gap={"1.25rem"} width='full'>
+            <h1 className={styles.heading}>Регистрация</h1>
             <Field.Root>
                 <Field.Label>Имя</Field.Label>
-                <Input placeholder="Введите имя" />
+                <Input className={styles.input} size={"md"} placeholder="Введите имя"/>
                 <Field.ErrorText>This field is required</Field.ErrorText>
             </Field.Root>
 
             <Field.Root>
                 <Field.Label>Email</Field.Label>
-                <Input placeholder="Введите email" />
+                <Input className={styles.input} size={"md"} placeholder="Введите email"/>
                 <Field.ErrorText>This field is required</Field.ErrorText>
             </Field.Root>
 
             <Field.Root>
                 <Field.Label>Пароль</Field.Label>
-                <Input placeholder="Введите пароль" />
+                <Input className={styles.input} size={"md"} placeholder="Введите пароль"/>
                 <Field.ErrorText>This field is required</Field.ErrorText>
             </Field.Root>
-            <p>Есть аккаунт? <Link className={styles.link} to={'/login'}>Войдите</Link></p>
-            <Button width='full'>Зарегистрироваться</Button>
+            <p className={styles.link}>Есть аккаунт? <Link className={styles.link__inner}
+                                                           to={'/signup'}>Войдите</Link></p>
+            <Button className={styles.button} size={"lg"} width='full'>Зарегистрироваться</Button>
         </VStack>
     </form>
 }
 
-export default RegisterForm;
+export default LoginForm;
