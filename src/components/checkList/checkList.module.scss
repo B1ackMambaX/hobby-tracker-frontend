@@ -1,0 +1,20 @@
+.label {
+  font-size: 1.2rem;
+}
+.task {
+  display: flex;
+  align-items: flex-start;
+}
+
+.list {
+  height: 60vh;
+  overflow-y: scroll;
+  margin-top: 2rem;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.date {
+  margin-top: 0.5rem;
+  color: var(--green);
+}

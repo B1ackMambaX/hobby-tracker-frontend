@@ -1,0 +1,58 @@
+.wrapper {
+  position: relative;
+  padding: 2rem 1rem;
+  background-color: var(--light-green);
+  min-height: 100vh;
+}
+
+.logo {
+  margin: 0 auto;
+}
+
+.back {
+  position: absolute;
+  top: 2rem;
+  padding: 15px 15px;
+  background-color: #fff;
+  border-radius: 100%;
+}
+
+.inner {
+  background-color: #fff;
+  border-radius: var(--out-radius);
+  padding: 1.25rem;
+  min-height: 75vh;
+}
+
+.tabs {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tab {
+  cursor: pointer;
+  text-align: center;
+  width: 50%;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem 0;
+  transition: 0.3s all;
+  border-radius: var(--out-radius);
+
+  &_active {
+    background-color: var(--green);
+    color: #fff;
+  }
+}
+
+.heading {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--green);
+}

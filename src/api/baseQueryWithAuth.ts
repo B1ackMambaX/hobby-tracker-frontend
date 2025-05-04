@@ -25,7 +25,7 @@ const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQuery
     const url = typeof args === 'string' ? args : args.url;
     // Если ошибка 401 и текущий запрос не к /refresh, пробуем обновить токен
     if (url !== '/refresh' && result.error && result.error.status === 401) {
-        const refreshResult = (await baseQuery('/refresh', api, extraOptions)) as { data?: AuthResponse };
+        const refreshResult = (await baseQuery('/refresh/', api, extraOptions)) as { data?: AuthResponse };
 
         if (refreshResult.data) {
             api.dispatch(
