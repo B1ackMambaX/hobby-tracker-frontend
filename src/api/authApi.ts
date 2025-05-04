@@ -20,7 +20,7 @@ const authApi = createApi({
     reducerPath: 'authApi',
     tagTypes: ['Auth', 'Users'],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${BACKEND_URL}/api`,
+        baseUrl: `${BACKEND_URL}/api/auth`,
         credentials: 'include',
     }),
     endpoints: builder => ({

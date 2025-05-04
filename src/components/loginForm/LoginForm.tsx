@@ -1,14 +1,23 @@
 import {Button, Field, Input, VStack} from "@chakra-ui/react";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import styles from "./loginForm.module.scss";
-import {useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {validateEmail, validatePassword} from "@/utils/validators.ts";
+import {useLoginUserMutation} from "@/api/authApi.ts";
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [login, {isSuccess, isError, error}] = useLoginUserMutation();
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/");
+        }
+    }, [isSuccess])
 
     const submitHandler = () => {
         const emailError = validateEmail(email);
@@ -19,9 +28,22 @@ const LoginForm = () => {
             return;
         }
 
-        console.log(email);
-        console.log(password);
+        login({email, password});
     }
+
+    const processError = useCallback(() => {
+        const fetchError = error as {data: object};
+        if (isError) {
+            if ('message' in fetchError.data && fetchError.data.message === 'User does not exist') {
+                return <p className={styles.error}>Пользователь не найден</p>;
+            }
+
+            if ('message' in fetchError.data && fetchError.data.message === 'Incorrect password') {
+                return <p className={styles.error}>Неверный пароль</p>;
+            }
+            return <p className={styles.error}>Непридвиденная ошибка, попробуйте позже</p>;
+        }
+    }, [isError, error]);
 
 
     return <form className={styles.form}>
@@ -43,6 +65,7 @@ const LoginForm = () => {
             </Field.Root>
             <p className={styles.link}>Нет аккаунта? <Link className={styles.link__inner}
                                                            to={'/signup'}>Зарегистрируйтесь</Link></p>
+            {processError()}
             <Button onClick={submitHandler} className={styles.button} size={"lg"} width='full'>Войти</Button>
         </VStack>
     </form>

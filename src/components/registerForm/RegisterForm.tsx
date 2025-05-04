@@ -1,16 +1,26 @@
 import {Button, Field, Input, VStack} from "@chakra-ui/react";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import styles from "./registerForm.module.scss";
-import {useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {validateEmail, validatePassword, validateRequiredField} from "@/utils/validators.ts";
+import {useRegisterUserMutation} from "@/api/authApi.ts";
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [nameError, setNameError] = useState("");
+    const [register, {isSuccess, isError, error}] = useRegisterUserMutation();
+
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/");
+        }
+    }, [isSuccess]);
 
 
     const handleSubmit = () => {
@@ -24,10 +34,18 @@ const LoginForm = () => {
             return;
         }
 
-        console.log(name);
-        console.log(email);
-        console.log(password);
+        register({name, email, password});
     }
+
+    const processError = useCallback(() => {
+        const fetchError = error as {data: object};
+        if (isError) {
+            if ('message' in fetchError.data && fetchError.data.message === 'User already exists') {
+                return <p className={styles.error}>Пользователь уже существует</p>;
+            }
+            return <p className={styles.error}>Непридвиденная ошибка, попробуйте позже</p>;
+        }
+    }, [isError, error]);
 
 
     return <form className={styles.form}>
@@ -73,6 +91,7 @@ const LoginForm = () => {
             </Field.Root>
             <p className={styles.link}>Есть аккаунт? <Link className={styles.link__inner}
                                                            to={'/login'}>Войдите</Link></p>
+            {processError()}
             <Button onClick={handleSubmit} className={styles.button} size={"lg"} width='full'>Зарегистрироваться</Button>
         </VStack>
     </form>
