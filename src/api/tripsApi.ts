@@ -14,12 +14,17 @@ const tripsApi = createApi({
                 body: trip
             }),
             invalidatesTags: ['Trips']
+        }),
+        getTrips: builder.query<Trip[], void>({
+            query: () => '/trips/',
+            providesTags: ['Trips']
         })
     }),
 });
 
 export const {
     useAddTripMutation,
+    useGetTripsQuery
 } = tripsApi;
 
 export default tripsApi;
