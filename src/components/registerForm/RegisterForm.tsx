@@ -1,32 +1,79 @@
 import {Button, Field, Input, VStack} from "@chakra-ui/react";
 import {Link} from "react-router";
 import styles from "./registerForm.module.scss";
+import {useState} from "react";
+import {validateEmail, validatePassword, validateRequiredField} from "@/utils/validators.ts";
 
 const LoginForm = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [nameError, setNameError] = useState("");
+
+
+    const handleSubmit = () => {
+        const emailError = validateEmail(email);
+        const passwordError = validatePassword(password);
+        const nameError = validateRequiredField(name);
+        setEmailError(emailError);
+        setPasswordError(passwordError);
+        setNameError(nameError);
+        if (emailError || passwordError || nameError) {
+            return;
+        }
+
+        console.log(name);
+        console.log(email);
+        console.log(password);
+    }
+
+
     return <form className={styles.form}>
         <img className={styles.logo} src="/public/logo.svg" alt="Логотип"/>
         <VStack className={styles.inner} gap={"1.25rem"} width='full'>
             <h1 className={styles.heading}>Регистрация</h1>
-            <Field.Root>
+            <Field.Root invalid={nameError !== ''}>
                 <Field.Label>Имя</Field.Label>
-                <Input className={styles.input} size={"md"} placeholder="Введите имя"/>
-                <Field.ErrorText>This field is required</Field.ErrorText>
+                <Input
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    className={styles.input}
+                    size={"md"}
+                    placeholder="Введите имя"
+                />
+                <Field.ErrorText>{nameError}</Field.ErrorText>
             </Field.Root>
 
-            <Field.Root>
+            <Field.Root invalid={emailError !== ''}>
                 <Field.Label>Email</Field.Label>
-                <Input className={styles.input} size={"md"} placeholder="Введите email"/>
-                <Field.ErrorText>This field is required</Field.ErrorText>
+                <Input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className={styles.input}
+                    size={"md"}
+                    placeholder="Введите email"
+                />
+                <Field.ErrorText>{emailError}</Field.ErrorText>
             </Field.Root>
 
-            <Field.Root>
+            <Field.Root invalid={passwordError !== ''}>
                 <Field.Label>Пароль</Field.Label>
-                <Input className={styles.input} size={"md"} placeholder="Введите пароль"/>
-                <Field.ErrorText>This field is required</Field.ErrorText>
+                <Input
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    className={styles.input}
+                    size={"md"}
+                    placeholder="Введите пароль"
+                />
+                <Field.ErrorText>{passwordError}</Field.ErrorText>
             </Field.Root>
             <p className={styles.link}>Есть аккаунт? <Link className={styles.link__inner}
-                                                           to={'/signup'}>Войдите</Link></p>
-            <Button className={styles.button} size={"lg"} width='full'>Зарегистрироваться</Button>
+                                                           to={'/login'}>Войдите</Link></p>
+            <Button onClick={handleSubmit} className={styles.button} size={"lg"} width='full'>Зарегистрироваться</Button>
         </VStack>
     </form>
 }

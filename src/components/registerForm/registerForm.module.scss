@@ -15,12 +15,12 @@
 
 .logo {
   margin-bottom: auto;
-  margin-top: 2rem;
 }
 
 .inner {
   background-color: #fff;
   border-radius: var(--out-radius);
+  box-shadow: var(--chakra-shadows-md);
   margin-bottom: auto;
   padding: 1.5rem;
   gap: 1.25rem;
@@ -29,11 +29,12 @@
 .form {
   width: 100%;
   min-height: 100vh;
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   background-color: var(--light-blue);
 }
 
