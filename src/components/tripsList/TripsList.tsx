@@ -8,7 +8,6 @@ const TripsList = () => {
 
       <VStack mt={4} gap={4}>
           <Trip name={"Путешествие на Таганай"} status={"Активно"} budget={50000} startDate={"01.06.2025"} endDate={"08.06.2025"}/>
-          <Trip name={"Путешествие на Таганай"} status={"Активно"} budget={50000} startDate={"01.06.2025"} endDate={"08.06.2025"}/>
           <Trip name={"Путешествие на Таганай"} status={"Завершено"} budget={50000} startDate={"01.06.2025"} endDate={"08.06.2025"}/>
       </VStack>
       <Button className={styles.button}>Добавить</Button>
