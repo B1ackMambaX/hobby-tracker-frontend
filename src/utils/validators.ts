@@ -30,3 +30,43 @@ export const validateRequiredField = (field: string) => {
 
     return "";
 }
+
+const validateDate = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const cleanedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    if (isNaN(cleanedDate.getTime())) {
+        return "Введите дату";
+    }
+
+    if (cleanedDate.getFullYear() > today.getFullYear() + 1 || cleanedDate.getTime() < today.getTime()) {
+        return "Некорректный промежуток даты"
+    }
+
+    return "";
+}
+
+export const validateStartDate = validateDate;
+
+export const validateEndDate = (startDate: Date, endDate: Date) => {
+    const basicValidationError = validateDate(endDate);
+    if (basicValidationError !== "") {
+        return basicValidationError;
+    }
+
+    const cleanedStartDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+    const cleanedEndDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+    if (cleanedEndDate.getTime() <= cleanedStartDate.getTime()) {
+        return "Дата конца должна быть позже даты начала";
+    }
+
+    return "";
+};
+
+export const validateNumber = (number: number) => {
+    if (number <= 0 || isNaN(number)) {
+        return "Введите корректное значение";
+    }
+    return "";
+}
