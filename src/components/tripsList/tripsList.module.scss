@@ -1,12 +1,38 @@
 .wrapper {
-  padding: 1rem;
+  min-height: 100vh;
+  background-color: var(--light-green);
+  padding: 2rem 1rem calc(80px + 3rem) 1rem;
+  position: relative;
+}
+
+.logo {
+  margin: 0 auto;
 }
 
 .heading {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
   text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--green);
 }
 
-.button {
-  display: block;
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 1rem auto 0 auto;
+  width: 10rem;
+  background-color: var(--green);
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 400;
+  height: 3rem;
+  border-radius: var(--out-radius);
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
 }

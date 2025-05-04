@@ -1,39 +1,20 @@
-import {Button, Card, DataList, HStack, Tag} from "@chakra-ui/react";
 import TripProps from "@/components/trip/trip.props.ts";
+import styles from './trip.module.scss';
+import {Button} from "@chakra-ui/react";
 
 const Trip = ({name, startDate, endDate, budget, status}: TripProps) => {
-    return <Card.Root width="full">
-        <Card.Header>
-            <Card.Title>{name}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-            <HStack gap={8}>
-                <DataList.Root>
-                    <DataList.Item>
-                        <DataList.ItemLabel>Даты</DataList.ItemLabel>
-                        <DataList.ItemValue>{`${startDate} - ${endDate}`}</DataList.ItemValue>
-                    </DataList.Item>
-                </DataList.Root>
-                <DataList.Root>
-                    <DataList.Item>
-                        <DataList.ItemLabel>Бюджет</DataList.ItemLabel>
-                        <DataList.ItemValue>{`${budget}₽`}</DataList.ItemValue>
-                    </DataList.Item>
-                </DataList.Root>
-                <DataList.Root>
-                    <DataList.Item>
-                        <DataList.ItemLabel>Статус</DataList.ItemLabel>
-                        <DataList.ItemValue><Tag.Root>
-                            <Tag.Label>{status}</Tag.Label>
-                        </Tag.Root></DataList.ItemValue>
-                    </DataList.Item>
-                </DataList.Root>
-            </HStack>
-        </Card.Body>
-        <Card.Footer>
-            <Button>Подробнее</Button>
-        </Card.Footer>
-    </Card.Root>
+    return <article className={styles.wrapper}>
+        <h3 className={styles.heading}>{name}</h3>
+        <div className={styles.info}>
+            <time className={styles.dates}>{`${startDate} - ${endDate}`}</time>
+            <p className={styles.budget}>{`${budget}₽`}</p>
+        </div>
+
+        <div className={styles.badges}>
+            <p className={`${styles.status} ${styles.status_active}`}>{status}</p>
+            <Button className={styles.button} size={'sm'}>Подробнее</Button>
+        </div>
+    </article>
 }
 
 export default Trip;

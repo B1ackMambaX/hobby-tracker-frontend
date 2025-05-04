@@ -1,0 +1,51 @@
+.wrapper {
+  padding: 1.25rem;
+  width: 100%;
+  border-radius: var(--out-radius);
+  background-color: #fff;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+.badges {
+  margin-top: 1.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  background-color: #E2E8F0;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--inner-radius);
+
+  &_active {
+    color: var(--green);
+  }
+
+  &_finished {
+    color: var(--red);
+  }
+}
+
+
+
+.button {
+  background-color: var(--green);
+  color: #fff;
+  border-radius: var(--inner-radius);
+}
