@@ -1,0 +1,55 @@
+.budget {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  overflow-y: scroll;
+  margin-top: 2rem;
+  width: 100%;
+  align-items: center;
+}
+
+.chart {
+  width: 70%;
+}
+
+.categories {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.category {
+  padding: 0.5rem 1rem;
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+
+  &_food {
+    color: rgba(54, 162, 235, 1);
+    background-color: rgba(54, 162, 235, 0.2);
+  }
+
+  &_transport {
+    color: rgba(255, 99, 132, 1);
+    background-color: rgba(255, 99, 132, 0.2);
+  }
+
+  &_live {
+    color: rgba(75, 192, 192, 1);
+    background-color: rgba(75, 192, 192, 0.2);
+  }
+
+  &_other {
+    color: rgba(153, 102, 255, 1);
+    background-color: rgba(153, 102, 255, 0.2);
+  }
+
+  &_remaining {
+    color: rgba(255, 159, 64, 1);
+    background-color: rgba(255, 159, 64, 0.2);
+  }
+}

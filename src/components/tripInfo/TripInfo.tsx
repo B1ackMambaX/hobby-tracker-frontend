@@ -5,6 +5,7 @@ import CheckList from "@/components/checkList/CheckList.tsx";
 import {useGetTripsQuery} from "@/api/tripsApi.ts";
 import {Button} from "@chakra-ui/react";
 import {downloadIcsFile} from "@/utils/ics.ts";
+import Budget from "@/components/budget/Budget.tsx";
 
 enum ActiveTab {
     CHECK_LIST,
@@ -55,7 +56,8 @@ const TripInfo = () => {
                 </div>
             </div>
 
-            <CheckList/>
+            {activeTab === ActiveTab.CHECK_LIST && <CheckList/>}
+            {activeTab === ActiveTab.BUDGET && <Budget/>}
         </section>
     </section>
 }
