@@ -1,0 +1,22 @@
+.spend {
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--inner-radius);
+  box-shadow: var(--chakra-shadows-md);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.amount {
+  font-size: 1.2rem;
+  font-weight: 700;
+}

@@ -2,6 +2,7 @@ import styles from "./budget.module.scss";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import SpendItem from "@/components/spendItem/SpendItem.tsx";
+import AddTaskModal from "@/components/addTaskModal/AddTaskModal.tsx";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -55,8 +56,9 @@ const Budget = () => {
                 <span>20000₽</span>
             </li>
         </ul>
-        <ul className="spends">
+        <ul className={styles.spends}>
             <SpendItem/>
+            <AddTaskModal/>
         </ul>
     </section>
 }
