@@ -9,7 +9,10 @@ const SpendItem = ({spend} : SpendItemProps) => {
             <h3 className={styles.heading}>{spend.name}</h3>
             <span className={styles.amount}>{`${spend.amount}₽`}</span>
         </div>
-        <span className={styles.category}>{getCategoryName(spend.category)}</span>
+        <div className={styles.footer}>
+            <span className={styles.category}>{getCategoryName(spend.category)}</span>
+            <span className={styles.date}>{new Date(spend.createdAt!).toLocaleDateString()}</span>
+        </div>
     </li>
 }
 

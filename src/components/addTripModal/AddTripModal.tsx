@@ -76,7 +76,7 @@ const AddTripModal = () => {
             <Portal>
                 <Dialog.Backdrop/>
                 <Dialog.Positioner style={{display: "flex", alignItems: "center"}}>
-                    <Dialog.Content className={styles.modal}>
+                    <Dialog.Content className={styles.modal} >
                         <h3 className={styles.heading}>Создание путешествия</h3>
 
                         <VStack gap="1.2rem">

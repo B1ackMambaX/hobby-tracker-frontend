@@ -2,23 +2,39 @@ import {
     Button,
     Dialog,
     Field,
+    Select,
     Input,
     Portal,
-    VStack,
+    VStack, createListCollection,
 } from "@chakra-ui/react";
 import styles from "./addSpend.module.scss";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
+    validateNumber,
     validateRequiredField,
 } from "@/utils/validators.ts";
 import {useParams} from "react-router";
 import {useAddSpendMutation} from "@/api/spendsApi.ts";
 
+const categories = createListCollection({
+    items: [
+        { label: "Транспорт", value: "transport" },
+        { label: "Еда", value: "food" },
+        { label: "Проживание", value: "residence" },
+        { label: "Другое", value: "other" },
+    ],
+})
+
 const AddSpendModal = () => {
+    const contentRef = useRef<HTMLDivElement>(null)
     const { id } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState("");
     const [nameError, setNameError] = useState("");
+    const [amount, setAmount] = useState("");
+    const [amountError, setAmountError] = useState("");
+    const [category, setCategory] = useState<"transport" | "food" | "residence" | "other">();
+    const [categoryError, setCategoryError] = useState("");
 
     const [addSpend, {isSuccess}] = useAddSpendMutation();
 
@@ -32,11 +48,15 @@ const AddSpendModal = () => {
 
     const handleSubmit = () => {
         const nErr = validateRequiredField(name);
+        const aErr = validateNumber(parseInt(amount, 10));
+        const cErr = validateRequiredField(category);
 
         setNameError(nErr);
+        setAmountError(aErr);
+        setCategoryError(cErr);
 
-        if (nErr) return;
-        addSpend({spend: {name, category: 'residence', amount: 10000}, tripId: id!})
+        if (nErr || aErr || cErr) return;
+        addSpend({spend: {name, category: category!, amount: parseInt(amount)}, tripId: id!})
     };
 
     return (
@@ -54,8 +74,8 @@ const AddSpendModal = () => {
 
             <Portal>
                 <Dialog.Backdrop/>
-                <Dialog.Positioner style={{display: "flex", alignItems: "center"}}>
-                    <Dialog.Content className={styles.modal}>
+                <Dialog.Positioner style={{display: "flex", justifyContent: "center"}}>
+                    <Dialog.Content className={styles.modal} ref={contentRef}>
                         <h3 className={styles.heading}>Создание траты</h3>
 
                         <VStack gap="1.2rem">
@@ -64,9 +84,46 @@ const AddSpendModal = () => {
                                 <Input
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    placeholder="Введите имя задачи"
+                                    placeholder="Введите имя траты"
                                 />
                                 <Field.ErrorText>{nameError}</Field.ErrorText>
+                            </Field.Root>
+
+                            <Field.Root invalid={!!amountError}>
+                                <Field.Label>Сумма</Field.Label>
+                                <Input
+                                    type="number"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                    placeholder={"Введите сумму"}
+                                />
+                                <Field.ErrorText>{amountError}</Field.ErrorText>
+                            </Field.Root>
+                            <Field.Root invalid={!!categoryError}>
+                                <Select.Root collection={categories} size="sm">
+                                    <Select.HiddenSelect onChange={(e) => setCategory(e.target.value)} />
+                                    <Select.Label>Категория</Select.Label>
+                                    <Select.Control>
+                                        <Select.Trigger>
+                                            <Select.ValueText placeholder="Выберите категорию" />
+                                        </Select.Trigger>
+                                        <Select.IndicatorGroup>
+                                            <Select.Indicator />
+                                        </Select.IndicatorGroup>
+                                    </Select.Control>
+                                    <Portal container={contentRef}>
+                                        <Select.Positioner>
+                                            <Select.Content>
+                                                {categories.items.map((item) => (
+                                                    <Select.Item item={item} key={item.value}>
+                                                        {item.label}
+                                                    </Select.Item>
+                                                ))}
+                                            </Select.Content>
+                                        </Select.Positioner>
+                                    </Portal>
+                                </Select.Root>
+                                <Field.ErrorText>{categoryError}</Field.ErrorText>
                             </Field.Root>
                         </VStack>
 
