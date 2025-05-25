@@ -6,6 +6,7 @@ import {useGetTripsQuery} from "@/api/tripsApi.ts";
 import {Button} from "@chakra-ui/react";
 import {downloadIcsFile} from "@/utils/ics.ts";
 import Budget from "@/components/budget/Budget.tsx";
+import ShareTripModal from "@/components/shareTripModal/ShareTripModal.tsx";
 
 enum ActiveTab {
     CHECK_LIST,
@@ -42,6 +43,7 @@ const TripInfo = () => {
         <Button
             onClick={handleAddToCalendar}
             className={styles.addToCalendar}>Добавить в календарь</Button>
+        <ShareTripModal/>
         <section className={styles.inner}>
             <div className={styles.tabs}>
                 <div
