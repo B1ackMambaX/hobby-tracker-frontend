@@ -38,10 +38,12 @@ const AddTaskModal = () => {
         const sdErr = validateStartDate(new Date(startDate));
         const nErr = validateRequiredField(name);
 
-        setStartDateError(sdErr);
+        if (sdErr !== 'Введите дату') {
+            setStartDateError(sdErr);
+        }
         setNameError(nErr);
 
-        if (sdErr || nErr) return;
+        if (sdErr && sdErr !== 'Введите дату' || nErr) return;
         addTask({task: {name, date: new Date(startDate), status: 'inProgress'}, tripId: id!})
     };
 

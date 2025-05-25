@@ -1,0 +1,46 @@
+.add {
+  background-color: var(--green);
+  border-radius: var(--inner-radius);
+  width: 100%;
+  padding: 1.5rem 0;
+  font-size: 1.5rem;
+  margin: 2rem auto 0 auto;
+}
+
+.modal {
+  max-width: calc(500px - 2rem);
+  transform: translateX(-0.5rem);
+  width: 100%;
+  margin: 1rem;
+  padding: 2rem 1rem;
+  border-radius: var(--out-radius);
+}
+
+.heading {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: var(--green);
+  color: #fff;
+  width: calc(50% - 0.5rem);
+  border-radius: var(--out-radius);
+
+  &_cancel {
+    background-color: var(--red);
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.input {
+  border-radius: var(--inner-radius);
+  padding: 0.65rem 1rem;
+}

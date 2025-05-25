@@ -29,7 +29,7 @@ const CheckList = () => {
                 <Checkbox.Control width={'1.5rem'} height={"1.5rem"}/>
                 <Checkbox.Label>
                     <p className={styles.label}>{task.name}</p>
-                    <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>
+                    {task.date && <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>}
                 </Checkbox.Label>
             </Checkbox.Root>)
         });

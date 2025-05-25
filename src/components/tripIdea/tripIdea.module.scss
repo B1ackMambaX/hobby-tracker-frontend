@@ -32,7 +32,6 @@
   margin-top: 1rem;
   span {
     font-weight: 700;
-
   }
 }
 
@@ -44,4 +43,8 @@
   background-color: var(--green);
   color: #fff;
   border-radius: var(--inner-radius);
+}
+.list {
+  list-style-type: circle;
+  margin-left: 1rem;
 }

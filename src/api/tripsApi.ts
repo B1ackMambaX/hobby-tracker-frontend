@@ -18,13 +18,22 @@ const tripsApi = createApi({
         getTrips: builder.query<Trip[], void>({
             query: () => '/trips/',
             providesTags: ['Trips']
+        }),
+        applyTemplate: builder.mutation<unknown, {startDate: Date, endDate: Date, templateId: string}>({
+            query: (body) => ({
+                url: '/trips/apply-template',
+                method: 'POST',
+                body
+            }),
+            invalidatesTags: ['Trips']
         })
     }),
 });
 
 export const {
     useAddTripMutation,
-    useGetTripsQuery
+    useGetTripsQuery,
+    useApplyTemplateMutation
 } = tripsApi;
 
 export default tripsApi;
