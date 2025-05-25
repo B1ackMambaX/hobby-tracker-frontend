@@ -5,6 +5,7 @@ import MainPage from "@/pages/MainPage.tsx";
 import TripPage from "@/pages/TripPage.tsx";
 import PrivateRoute from "@/components/privateRoute/PrivateRoute.tsx";
 import AuthRoute from "@/components/authRoute/AuthRoute.tsx";
+import TemplatesPage from "@/pages/TemplatesPage.tsx";
 
 const App = () => {
     return <BrowserRouter>
@@ -12,6 +13,7 @@ const App = () => {
             <Route element={<PrivateRoute/>}>
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path="/trip/:id" element={<TripPage/>}/>
+                <Route path="/ideas" element={<TemplatesPage/>}/>
             </Route>
             <Route element={<AuthRoute/>}>
                 <Route path="/login" element={<LoginPage/>}/>

@@ -1,0 +1,47 @@
+.wrapper {
+  padding: 1.25rem;
+  width: 100%;
+  border-radius: var(--out-radius);
+  background-color: #fff;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dates, .budget, .created {
+  width: max-content;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #f0f0f0;
+  border-radius: var(--out-radius);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.description {
+  margin-top: 1rem;
+  span {
+    font-weight: 700;
+
+  }
+}
+
+.button {
+  display: block;
+  width: 100%;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  background-color: var(--green);
+  color: #fff;
+  border-radius: var(--inner-radius);
+}
