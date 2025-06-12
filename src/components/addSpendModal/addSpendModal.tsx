@@ -49,7 +49,7 @@ const AddSpendModal = () => {
     const handleSubmit = () => {
         const nErr = validateRequiredField(name);
         const aErr = validateNumber(parseInt(amount, 10));
-        const cErr = validateRequiredField(category);
+        const cErr = validateRequiredField(category!);
 
         setNameError(nErr);
         setAmountError(aErr);
@@ -101,7 +101,7 @@ const AddSpendModal = () => {
                             </Field.Root>
                             <Field.Root invalid={!!categoryError}>
                                 <Select.Root collection={categories} size="sm">
-                                    <Select.HiddenSelect onChange={(e) => setCategory(e.target.value)} />
+                                    <Select.HiddenSelect onChange={(e) => setCategory(e.target.value as "transport" | "food" | "residence" | "other")} />
                                     <Select.Label>Категория</Select.Label>
                                     <Select.Control>
                                         <Select.Trigger>

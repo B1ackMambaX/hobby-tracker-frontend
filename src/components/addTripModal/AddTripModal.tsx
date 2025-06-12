@@ -57,6 +57,7 @@ const AddTripModal = () => {
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             budget: parseInt(budget, 10),
+            status: 'active'
         });
     };
 
