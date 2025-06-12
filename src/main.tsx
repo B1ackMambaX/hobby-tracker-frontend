@@ -5,7 +5,11 @@ import App from './App.tsx'
 import {ChakraProvider, defaultSystem} from "@chakra-ui/react";
 import {Provider} from "react-redux";
 import store from "@/store";
+import {registerSW} from "virtual:pwa-register";
 
+registerSW({
+    immediate: true,
+})
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
