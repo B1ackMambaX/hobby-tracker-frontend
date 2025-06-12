@@ -4,7 +4,7 @@ networks:
 
 services:
   frontend:
-    build: src
+    build: .
     container_name: frontend
     env_file:
       - .env
