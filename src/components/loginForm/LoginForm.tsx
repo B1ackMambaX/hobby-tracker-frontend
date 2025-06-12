@@ -47,7 +47,7 @@ const LoginForm = () => {
 
 
     return <form className={styles.form}>
-        <img className={styles.logo} src="/public/logo.svg" alt="Логотип"/>
+        <img className={styles.logo} src="/logo.svg" alt="Логотип"/>
         <VStack className={styles.inner} gap={"1.25rem"} width='full'>
             <h1 className={styles.heading}>Войти</h1>
             <Field.Root invalid={emailError !== ''}>
