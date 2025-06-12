@@ -1,0 +1,61 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  BASE_DIR: ${{ vars.BASE_DIR }}
+  PROJECT_NAME: ${{ vars.PROJECT_NAME || 'frontend' }}
+  SERVER_SSH: ${{ secrets.SERVER_SSH }}
+  SERVER_USER: ${{ secrets.SERVER_USER }}
+  SERVER_HOST: ${{ secrets.SERVER_HOST }}
+  VITE_BACKEND_URL: ${{ vars.VITE_BACKEND_URL }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .env.production file
+        run: |
+          cat << EOF > .env
+          # URL бэкенда
+          VITE_BACKEND_URL=${{ env.VITE_BACKEND_URL }}
+          EOF
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ env.SERVER_SSH }}
+
+      - name: Copy files via SCP
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./* \
+            ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:/${{ env.BASE_DIR }}/${{ env.PROJECT_NAME }}
+
+      - name: Copy configs file
+        run: |
+          scp -o StrictHostKeyChecking=no -r ./.nginx ./.env \
+            ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:/${{ env.BASE_DIR }}/${{ env.PROJECT_NAME }}
+
+      - name: Run docker-compose on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} \
+            "cd /${{ env.BASE_DIR }}/${{ env.PROJECT_NAME }} && \
+             make docker-setup && \
+             sudo docker compose down && \
+             sudo docker compose up -d --build"
+
+      - name: Cleanup unused Docker resources on server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "
+            cd /${{ env.BASE_DIR }}/${{ env.PROJECT_NAME }} && \
+            sudo docker container prune -f && \
+            sudo docker image prune -af && \
+            sudo docker volume prune -f && \
+            sudo docker network prune -f
+          "
