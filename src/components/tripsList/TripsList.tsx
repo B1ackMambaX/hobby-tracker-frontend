@@ -1,11 +1,11 @@
 import styles from './tripsList.module.scss';
 import {VStack} from "@chakra-ui/react";
-import Logo from "@/components/logo/Logo.tsx";
+import Logo from "@/components/ui/logo/Logo.tsx";
 import NavBar from "@/components/navBar/NavBar.tsx";
 import {ActivePage} from "@/components/navBar/navBar.props.ts";
 import AddTripModal from "@/components/addTripModal/AddTripModal.tsx";
 import {useGetTripsQuery} from "@/api/tripsApi.ts";
-import Spinner from "@/components/spinner/Spinner.tsx";
+import Spinner from "@/components/ui/spinner/Spinner.tsx";
 import Trip from "@/components/trip/Trip.tsx";
 
 const TripsList = () => {

@@ -1,10 +1,10 @@
 import styles from "./templatesList.module.scss";
 import NavBar from "@/components/navBar/NavBar.tsx";
 import {ActivePage} from "@/components/navBar/navBar.props.ts";
-import Logo from "@/components/logo/Logo.tsx";
+import Logo from "@/components/ui/logo/Logo.tsx";
 import {useGetTemplatesQuery} from "@/api/tripTemplateApi.ts";
 import TripIdea from "@/components/tripIdea/TripIdea.tsx";
-import Spinner from "@/components/spinner/Spinner.tsx";
+import Spinner from "@/components/ui/spinner/Spinner.tsx";
 import {VStack, Switch} from "@chakra-ui/react";
 import {useState} from "react";
 

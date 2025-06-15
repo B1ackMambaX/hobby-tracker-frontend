@@ -1,4 +1,4 @@
-import Layout from "@/components/layout/Layout.tsx";
+import Layout from "@/components/ui/layout/Layout.tsx";
 import TripsList from "@/components/tripsList/TripsList.tsx";
 
 const MainPage = () => {
