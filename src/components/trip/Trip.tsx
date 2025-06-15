@@ -2,9 +2,10 @@ import TripProps from "@/components/trip/trip.props.ts";
 import styles from './trip.module.scss';
 import {Button} from "@chakra-ui/react";
 import {NavLink} from "react-router";
+import Card from "@/components/ui/card/Card.tsx";
 
 const Trip = ({name, startDate, endDate, budget, status, id}: TripProps) => {
-    return <article className={styles.wrapper}>
+    return <Card>
         <h3 className={styles.heading}>{name}</h3>
         <div className={styles.info}>
             <time className={styles.dates}>{`${startDate} - ${endDate}`}</time>
@@ -19,7 +20,7 @@ const Trip = ({name, startDate, endDate, budget, status, id}: TripProps) => {
                 <Button className={styles.button} size={'sm'}>Подробнее</Button>
             </NavLink>
         </div>
-    </article>
+    </Card>
 }
 
 export default Trip;

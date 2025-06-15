@@ -1,9 +1,10 @@
 import styles from './tripIdea.module.scss';
 import TripTemplate from "@/types/models/TripTemplate.ts";
 import ApplyTemplateModal from "@/components/applyTemplateModal/ApplyTemplateModal.tsx";
+import Card from "@/components/ui/card/Card.tsx";
 
 const TripIdea = (template: TripTemplate) => {
-    return <article className={styles.wrapper}>
+    return <Card>
         <h3 className={styles.heading}>{template.name}</h3>
         <div className={styles.info}>
             <p className={styles.dates}>{`Количество дней: ${template.daysLength}`}</p>
@@ -17,7 +18,7 @@ const TripIdea = (template: TripTemplate) => {
             </ul>
         </>}
         <ApplyTemplateModal id={template._id!} length={template.daysLength}/>
-    </article>
+    </Card>
 }
 
 export default TripIdea;

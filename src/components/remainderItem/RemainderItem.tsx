@@ -2,12 +2,13 @@ import RemainderItemProps from "@/components/remainderItem/remainderItem.props.t
 import styles from "./remainderItem.module.scss";
 import {Button} from "@chakra-ui/react";
 import {useDoneRemainderMutation, usePostponeRemainderMutation} from "@/api/remaindersApi.ts";
+import Card from "@/components/ui/card/Card.tsx";
 
 const RemainderItem = ({remainder}: RemainderItemProps) => {
     const [markAsDone] = useDoneRemainderMutation();
     const [postponeRemainder] = usePostponeRemainderMutation();
 
-    return <article className={styles.remainder}>
+    return <Card>
         <div className={styles.header}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
@@ -27,7 +28,7 @@ const RemainderItem = ({remainder}: RemainderItemProps) => {
             <Button onClick={() => markAsDone(remainder)} className={styles.button}
                     colorPalette="teal">Выполнено</Button>
         </div>
-    </article>
+    </Card>
 }
 
 export default RemainderItem;
