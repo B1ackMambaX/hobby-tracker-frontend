@@ -1,4 +1,3 @@
-import styles from './tripsList.module.scss';
 import {VStack} from "@chakra-ui/react";
 import AddTripModal from "@/components/addTripModal/AddTripModal.tsx";
 import {useGetTripsQuery} from "@/api/tripsApi.ts";
@@ -19,7 +18,7 @@ const TripsList = () => {
         }
     }
 
-    return <VStack className={styles.list} gap={'0.75rem'}>
+    return <VStack gap={'0.75rem'}>
         {isLoading ? <Spinner/> : processTrips()}
         <AddTripModal/>
     </VStack>

@@ -1,4 +1,3 @@
-import styles from "./templatesList.module.scss";
 import {useGetTemplatesQuery} from "@/api/tripTemplateApi.ts";
 import TripIdea from "@/components/tripIdea/TripIdea.tsx";
 import Spinner from "@/components/ui/spinner/Spinner.tsx";
@@ -24,7 +23,7 @@ const TemplatesList = () => {
         }
     }
 
-    return <VStack className={styles.list} gap={'0.75rem'}>
+    return <VStack gap={'0.75rem'}>
         <Switch.Root checked={userIdeas} onCheckedChange={(e) => setUserIdeas(e.checked)} colorPalette="teal"
                      size="lg">
             <Switch.HiddenInput/>
