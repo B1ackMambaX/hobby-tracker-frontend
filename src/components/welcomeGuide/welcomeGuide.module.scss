@@ -1,0 +1,31 @@
+.wrapper {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: var(--out-radius);
+}
+
+.heading {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.image {
+  border-radius: var(--inner-radius);
+  margin-bottom: 0.5rem;
+}
+
+.features {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.item {
+  list-style-type: circle;
+}
+
+.step {
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
