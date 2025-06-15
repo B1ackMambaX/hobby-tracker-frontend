@@ -1,0 +1,31 @@
+.remainder {
+  width: 100%;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: var(--out-radius);
+}
+
+.message {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.date {
+  margin-top: 0.5rem;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  border-radius: var(--out-radius);
+}
