@@ -1,4 +1,4 @@
-import LogoProps from "@/components/logo/logo.props.ts";
+import LogoProps from "@/components/ui/logo/logo.props.ts";
 
 const Logo = ({width, height, color, className}: LogoProps) => {
     return <svg className={className} xmlns="http://www.w3.org/2000/svg" width={width || 74} height={height || 76} viewBox="0 0 74 76" fill="none">

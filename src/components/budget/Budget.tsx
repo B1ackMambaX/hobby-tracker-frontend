@@ -5,7 +5,7 @@ import SpendItem from "@/components/spendItem/SpendItem.tsx";
 import {useParams} from "react-router";
 import {useGetSpendsQuery} from "@/api/spendsApi.ts";
 import {skipToken} from "@reduxjs/toolkit/query/react";
-import Spinner from "@/components/spinner/Spinner.tsx";
+import Spinner from "@/components/ui/spinner/Spinner.tsx";
 import {useGetTripsQuery} from "@/api/tripsApi.ts";
 import Trip from "@/types/models/Trip.ts";
 import {useEffect, useState} from "react";

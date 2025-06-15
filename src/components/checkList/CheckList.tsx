@@ -3,7 +3,7 @@ import styles from "./checkList.module.scss";
 import AddTaskModal from "@/components/addTaskModal/AddTaskModal.tsx";
 import {useGetTasksQuery, useUpdateTaskMutation} from "@/api/taskApi.ts";
 import {useParams} from "react-router";
-import Spinner from "@/components/spinner/Spinner.tsx";
+import Spinner from "@/components/ui/spinner/Spinner.tsx";
 
 const CheckList = () => {
     const {id} = useParams();

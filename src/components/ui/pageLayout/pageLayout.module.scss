@@ -1,8 +1,8 @@
 .wrapper {
+  position: relative;
   min-height: 100vh;
   background-color: var(--light-green);
   padding: 2rem 1rem calc(80px + 3rem) 1rem;
-  position: relative;
 }
 
 .logo {

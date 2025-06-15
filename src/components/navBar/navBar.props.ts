@@ -1,5 +1,6 @@
 export enum ActivePage {
     HOME,
+    TRIPS,
     IDEAS,
     PROFILE
 }
