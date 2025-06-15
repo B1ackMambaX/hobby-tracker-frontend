@@ -1,22 +1,12 @@
-import {
-    Button,
-    Dialog,
-    Field,
-    Input,
-    Portal,
-    VStack,
-} from "@chakra-ui/react";
-import styles from "./addTask.module.scss";
+import {Field, Input, VStack,} from "@chakra-ui/react";
 import {useEffect, useState} from "react";
-import {
-    validateRequiredField,
-    validateStartDate,
-} from "@/utils/validators.ts";
+import {validateRequiredField, validateStartDate,} from "@/utils/validators.ts";
 import {useAddTaskMutation} from "@/api/taskApi.ts";
 import {useParams} from "react-router";
+import DialogLayout from "@/components/ui/dialogLayout/DialogLayout.tsx";
 
 const AddTaskModal = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -47,65 +37,30 @@ const AddTaskModal = () => {
         addTask({task: {name, date: new Date(startDate), status: 'inProgress'}, tripId: id!})
     };
 
-    return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-            <Dialog.Trigger asChild>
-                <Button className={styles.add}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-                        <path d="M16.5 16.5V7.5H19.5V16.5H28.5V19.5H19.5V28.5H16.5V19.5H7.5V16.5H16.5Z"
-                              fill="white"/>
-                    </svg>
-                </Button>
-            </Dialog.Trigger>
+    return <DialogLayout isOpen={isOpen} heading={"Создать задачу"} setIsOpen={setIsOpen as (details: unknown) => void}
+                         handleConfirm={handleSubmit}>
+        <VStack gap="1.2rem">
+            <Field.Root invalid={!!nameError}>
+                <Field.Label>Задача</Field.Label>
+                <Input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Введите имя задачи"
+                />
+                <Field.ErrorText>{nameError}</Field.ErrorText>
+            </Field.Root>
 
-            <Portal>
-                <Dialog.Backdrop/>
-                <Dialog.Positioner style={{display: "flex", alignItems: "center"}}>
-                    <Dialog.Content className={styles.modal}>
-                        <h3 className={styles.heading}>Создание задачи</h3>
-
-                        <VStack gap="1.2rem">
-                            <Field.Root invalid={!!nameError}>
-                                <Field.Label>Задача</Field.Label>
-                                <Input
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Введите имя задачи"
-                                />
-                                <Field.ErrorText>{nameError}</Field.ErrorText>
-                            </Field.Root>
-
-                            <Field.Root invalid={!!startDateError}>
-                                <Field.Label>Дата</Field.Label>
-                                <Input
-                                    type="date"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
-                                />
-                                <Field.ErrorText>{startDateError}</Field.ErrorText>
-                            </Field.Root>
-                        </VStack>
-
-                        <div className={styles.buttons}>
-                            <Button onClick={handleSubmit} className={styles.button} size="lg">
-                                Добавить
-                            </Button>
-
-                            <Button
-                                onClick={() => setIsOpen(false)}
-                                className={`${styles.button} ${styles.button_cancel}`}
-                                size="lg"
-                            >
-                                Отмена
-                            </Button>
-                        </div>
-                    </Dialog.Content>
-                </Dialog.Positioner>
-            </Portal>
-        </Dialog.Root>
-    );
+            <Field.Root invalid={!!startDateError}>
+                <Field.Label>Дата</Field.Label>
+                <Input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
+                <Field.ErrorText>{startDateError}</Field.ErrorText>
+            </Field.Root>
+        </VStack>
+    </DialogLayout>
 };
 
 export default AddTaskModal;

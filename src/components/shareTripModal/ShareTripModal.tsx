@@ -1,10 +1,4 @@
-import {
-    Button,
-    Dialog,
-    Portal,
-    Textarea,
-    Field
-} from "@chakra-ui/react";
+import {Textarea, Field, Button} from "@chakra-ui/react";
 import styles from "./shareTrip.module.scss";
 import {useParams} from "react-router";
 import {useEffect, useState} from "react";
@@ -14,6 +8,7 @@ import {useGetTasksQuery} from "@/api/taskApi.ts";
 import {skipToken} from "@reduxjs/toolkit/query/react";
 import {useGetTripsQuery} from "@/api/tripsApi.ts";
 import getDaysLength from "@/utils/getDaysLength.ts";
+import DialogLayout from "@/components/ui/dialogLayout/DialogLayout.tsx";
 
 const AddSpendModal = () => {
     const {id} = useParams();
@@ -50,47 +45,20 @@ const AddSpendModal = () => {
         })
     };
 
-    return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-            <Dialog.Trigger asChild>
-                <Button onClick={() => setIsOpen(true)} className={styles.add}>
-                    Поделиться путешествием
-                </Button>
-            </Dialog.Trigger>
-
-            <Portal>
-                <Dialog.Backdrop/>
-                <Dialog.Positioner style={{display: "flex", alignItems: "center"}}>
-                    <Dialog.Content className={styles.modal}>
-                        <h3 className={styles.heading}>Поделиться путешествием</h3>
-                        <Field.Root invalid={!!descrError}>
-                            <Field.Label>
-                                Описание
-                            </Field.Label>
-                            <Textarea value={description} onChange={(e) => setDescription(e.target.value)}
-                                      resize={"none"} className={styles.textarea} placeholder="Введите описание"/>
-                            <Field.ErrorText>{descrError}</Field.ErrorText>
-                        </Field.Root>
-                        <div className={styles.buttons}>
-                            <Button onClick={handleSubmit} className={styles.button} size="lg">
-                                Добавить
-                            </Button>
-
-                            <Button
-                                className={`${styles.button} ${styles.button_cancel}`}
-                                onClick={() => setIsOpen(false)}
-                                size="lg"
-                            >
-                                Отмена
-                            </Button>
-                        </div>
-                    </Dialog.Content>
-                </Dialog.Positioner>
-            </Portal>
-        </Dialog.Root>
-    );
+    return <DialogLayout isOpen={isOpen} heading={"Поделиться путешествием"}
+                         setIsOpen={setIsOpen as (details: unknown) => void} handleConfirm={handleSubmit}
+                         overridingButton={<Button onClick={() => setIsOpen(true)} className={styles.add}>
+                             Поделиться путешествием
+                         </Button>}>
+        <Field.Root invalid={!!descrError}>
+            <Field.Label>
+                Описание
+            </Field.Label>
+            <Textarea value={description} onChange={(e) => setDescription(e.target.value)}
+                      resize={"none"} className={styles.textarea} placeholder="Введите описание"/>
+            <Field.ErrorText>{descrError}</Field.ErrorText>
+        </Field.Root>
+    </DialogLayout>
 };
 
 export default AddSpendModal;
