@@ -8,7 +8,7 @@ import store from "@/store";
 import {registerSW} from "virtual:pwa-register";
 
 registerSW({
-    immediate: true,
+    immediate: false,
 })
 
 createRoot(document.getElementById('root')!).render(
