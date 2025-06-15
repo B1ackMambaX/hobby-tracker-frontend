@@ -1,13 +1,14 @@
-import {VStack, Checkbox} from "@chakra-ui/react";
+import {VStack, Checkbox, Button} from "@chakra-ui/react";
 import styles from "./checkList.module.scss";
 import AddTaskModal from "@/components/addTaskModal/AddTaskModal.tsx";
-import {useGetTasksQuery, useUpdateTaskMutation} from "@/api/taskApi.ts";
+import {useDeleteTaskMutation, useGetTasksQuery, useUpdateTaskMutation} from "@/api/taskApi.ts";
 import {useParams} from "react-router";
 import Spinner from "@/components/ui/spinner/Spinner.tsx";
 
 const CheckList = () => {
     const {id} = useParams();
     const {data: tasks, isFetching} = useGetTasksQuery(id!);
+    const [deleteTask] = useDeleteTaskMutation();
     const [updateTask] = useUpdateTaskMutation();
 
     const processTasks = () => {
@@ -27,10 +28,14 @@ const CheckList = () => {
             >
                 <Checkbox.HiddenInput/>
                 <Checkbox.Control width={'1.5rem'} height={"1.5rem"}/>
-                <Checkbox.Label>
-                    <p className={styles.label}>{task.name}</p>
-                    {task.date && <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>}
-                </Checkbox.Label>
+                <div className={styles.taskContent}>
+                    <Checkbox.Label>
+                        <p className={styles.label}>{task.name}</p>
+                        {task.date && <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>}
+                    </Checkbox.Label>
+
+                    <Button onClick={() => deleteTask(task)} colorPalette="red" variant="surface">Удалить</Button>
+                </div>
             </Checkbox.Root>)
         });
     }

@@ -17,7 +17,7 @@ const RemainderItem = ({remainder}: RemainderItemProps) => {
             <h3 className={styles.message}>{remainder.message}</h3>
         </div>
 
-        <p className={styles.date}>{new Date(remainder.remindAt).toLocaleDateString()}</p>
+        <p className={styles.date}>{new Date(remainder.taskId.date).toLocaleDateString()}</p>
 
         <div className={styles.buttons}>
             {remainder.status !== 'postponed' &&
@@ -25,7 +25,7 @@ const RemainderItem = ({remainder}: RemainderItemProps) => {
                         colorPalette="blue">Отложить</Button>
             }
             <Button onClick={() => markAsDone(remainder)} className={styles.button}
-                    colorPalette="teal">Прочитано</Button>
+                    colorPalette="teal">Выполнено</Button>
         </div>
     </article>
 }
