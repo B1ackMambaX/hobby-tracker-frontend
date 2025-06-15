@@ -1,5 +1,5 @@
 import RemainderItemProps from "@/components/remainderItem/remainderItem.props.ts";
-import styles from "./RemainderItem.module.scss";
+import styles from "./remainderItem.module.scss";
 import {Button} from "@chakra-ui/react";
 import {useDoneRemainderMutation, usePostponeRemainderMutation} from "@/api/remaindersApi.ts";
 
