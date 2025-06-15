@@ -29,6 +29,13 @@ const tasksApi = createApi({
                 body: payload
             }),
             invalidatesTags: ['Tasks']
+        }),
+        deleteTask: builder.mutation<unknown, Task>({
+            query: (payload) => ({
+                url: `/tasks/${payload._id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Tasks']
         })
     }),
 });
@@ -37,6 +44,7 @@ export const {
     useAddTaskMutation,
     useGetTasksQuery,
     useUpdateTaskMutation,
+    useDeleteTaskMutation,
 } = tasksApi;
 
 export default tasksApi;

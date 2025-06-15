@@ -4,6 +4,7 @@
 .task {
   display: flex;
   align-items: flex-start;
+  width: 95%;
 }
 
 .list {
@@ -16,4 +17,10 @@
 .date {
   margin-top: 0.5rem;
   color: var(--green);
+}
+
+.taskContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
