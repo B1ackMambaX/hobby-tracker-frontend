@@ -31,7 +31,7 @@ const CheckList = () => {
                 <div className={styles.taskContent}>
                     <Checkbox.Label>
                         <p className={styles.label}>{task.name}</p>
-                        {task.date && <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>}
+                        {task?.date && <time className={styles.date}>{new Date(task.date).toLocaleDateString()}</time>}
                     </Checkbox.Label>
 
                     <Button onClick={() => deleteTask(task)} colorPalette="red" variant="surface">Удалить</Button>

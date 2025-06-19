@@ -21,13 +21,21 @@ const spendsApi = createApi({
 
             }),
             providesTags: ['Spends']
+        }),
+        deleteSpend: builder.mutation<unknown, string>({
+            query: (spendId) => ({
+                url: `/spends/${spendId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Spends']
         })
     }),
 });
 
 export const {
     useAddSpendMutation,
-    useGetSpendsQuery
+    useGetSpendsQuery,
+    useDeleteSpendMutation,
 } = spendsApi;
 
 export default spendsApi;

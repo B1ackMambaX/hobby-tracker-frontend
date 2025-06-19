@@ -26,6 +26,13 @@ const tripsApi = createApi({
                 body
             }),
             invalidatesTags: ['Trips']
+        }),
+        deleteTrip: builder.mutation<unknown, string>({
+            query: (tripId) => ({
+                url: `/trips/${tripId}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['Trips']
         })
     }),
 });
@@ -33,7 +40,8 @@ const tripsApi = createApi({
 export const {
     useAddTripMutation,
     useGetTripsQuery,
-    useApplyTemplateMutation
+    useApplyTemplateMutation,
+    useDeleteTripMutation,
 } = tripsApi;
 
 export default tripsApi;

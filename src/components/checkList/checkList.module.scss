@@ -5,6 +5,10 @@
   display: flex;
   align-items: flex-start;
   width: 95%;
+
+  &:nth-child(1) {
+    margin-top: 0.5rem;
+  }
 }
 
 .list {

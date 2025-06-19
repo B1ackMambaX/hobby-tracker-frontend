@@ -11,8 +11,8 @@ const TripIdea = (template: TripTemplate) => {
             <p className={styles.budget}>{`Бюджет: ${template.budget}₽`}</p>
         </div>
         <p className={styles.created}>{`Создал: ${template.createdBy ? template.createdBy?.email : 'TravelTracker'}`}</p>
-        <p className={styles.description}><span>Описание: </span>{template.description}</p>
-        {template.checklist.length > 0 && <><p className="bold">Чеклист:</p>
+        <pre className={styles.description}><span>Описание: </span>{template.description}</pre>
+        {template.checklist.length > 0 && <><p className={`${styles.checkList} bold`}>Чеклист:</p>
             <ul className={styles.list}>
                 {template.checklist.map((task, i) => (<li key={i}>{task}</li>))}
             </ul>

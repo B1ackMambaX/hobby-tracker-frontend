@@ -23,9 +23,15 @@
 
 .description {
   margin-top: 1rem;
+  text-wrap: wrap;
+  font-family: inherit;
   span {
     font-weight: 700;
   }
+}
+
+.checkList {
+  margin-top: 1rem;
 }
 
 .button {

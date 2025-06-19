@@ -1,8 +1,8 @@
 import styles from './tripInfo.module.scss'
-import {Link, useParams} from "react-router";
-import {useState} from "react";
+import {Link, useNavigate, useParams} from "react-router";
+import {useEffect, useState} from "react";
 import CheckList from "@/components/checkList/CheckList.tsx";
-import {useGetTripsQuery} from "@/api/tripsApi.ts";
+import {useDeleteTripMutation, useGetTripsQuery} from "@/api/tripsApi.ts";
 import {Button} from "@chakra-ui/react";
 import {downloadIcsFile} from "@/utils/ics.ts";
 import Budget from "@/components/budget/Budget.tsx";
@@ -15,9 +15,17 @@ enum ActiveTab {
 
 
 const TripInfo = () => {
-    const [activeTab, setActiveTab] = useState<ActiveTab>(ActiveTab.CHECK_LIST)
+    const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState<ActiveTab>(ActiveTab.CHECK_LIST);
+    const [deleteTrip, {isSuccess}] = useDeleteTripMutation();
     const {id} = useParams();
     const {data: trips} = useGetTripsQuery();
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/trips');
+        }
+    }, [isSuccess])
 
     const handleAddToCalendar = () => {
         if (!trips) return;
@@ -44,6 +52,8 @@ const TripInfo = () => {
             onClick={handleAddToCalendar}
             className={styles.addToCalendar}>Добавить в календарь</Button>
         <ShareTripModal/>
+        <Button colorPalette="red" variant="surface" onClick={() => deleteTrip(id!)}
+                className={styles.deleteButton}>Удалить</Button>
         <section className={styles.inner}>
             <div className={styles.tabs}>
                 <div
