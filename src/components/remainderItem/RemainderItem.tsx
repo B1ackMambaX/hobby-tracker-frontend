@@ -18,7 +18,7 @@ const RemainderItem = ({remainder}: RemainderItemProps) => {
             <h3 className={styles.message}>{remainder.message}</h3>
         </div>
 
-        <p className={styles.date}>{new Date(remainder.taskId.date).toLocaleDateString()}</p>
+        <p className={styles.date}>{new Date(remainder.taskId.date || remainder.remindAt).toLocaleDateString()}</p>
 
         <div className={styles.buttons}>
             {remainder.status !== 'postponed' &&

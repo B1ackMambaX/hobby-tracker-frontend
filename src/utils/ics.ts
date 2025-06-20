@@ -2,18 +2,13 @@ function escapeText(str: string): string {
     return str.replace(/,/g, '\\,').replace(/;/g, '\\;').replace(/\n/g, '\\n');
 }
 
-
-function toUtcString(date: Date): string {
+// Новый форматтер дат без времени
+function formatDateOnly(date: Date): string {
     const pad = (n: number) => String(n).padStart(2, '0');
     return (
-        date.getUTCFullYear() +
-        pad(date.getUTCMonth() + 1) +
-        pad(date.getUTCDate()) +
-        'T' +
-        pad(date.getUTCHours()) +
-        pad(date.getUTCMinutes()) +
-        pad(date.getUTCSeconds()) +
-        'Z'
+        date.getFullYear().toString() +
+        pad(date.getMonth() + 1) +
+        pad(date.getDate())
     );
 }
 
@@ -25,7 +20,13 @@ function generateIcs(trip: {
     description?: string;
 }): string {
     const uid = `${trip.id}@traveltracker.local`;
-    const dtstamp = toUtcString(new Date());
+    const dtstamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0,15) + 'Z';
+
+    // По спецификации iCalendar DTEND для all-day – это НЕ включительно,
+    // поэтому обычно к дате окончания прибавляют один день:
+    const endPlusOne = new Date(trip.endDate);
+    endPlusOne.setDate(endPlusOne.getDate() + 1);
+
     const lines = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
@@ -33,8 +34,9 @@ function generateIcs(trip: {
         'BEGIN:VEVENT',
         `UID:${uid}`,
         `DTSTAMP:${dtstamp}`,
-        `DTSTART:${toUtcString(trip.startDate)}`,
-        `DTEND:${toUtcString(trip.endDate)}`,
+        // вот тут меняем на date-only
+        `DTSTART;VALUE=DATE:${formatDateOnly(trip.startDate)}`,
+        `DTEND;VALUE=DATE:${formatDateOnly(endPlusOne)}`,
         `SUMMARY:${escapeText(trip.name)}`,
         trip.description
             ? `DESCRIPTION:${escapeText(trip.description)}`
